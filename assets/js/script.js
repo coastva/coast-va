@@ -3,17 +3,42 @@ document.addEventListener("DOMContentLoaded", function () {
     function csvToJson(csv) {
         const lines = csv.split("\n");
         const headers = lines[0].split(",");
-        const jsonData = lines.slice(1).map(line => {
-            const values = line.split(",");
-            return headers.reduce((object, header, index) => {
-                object[header.trim()] = values[index].trim();
+        const jsonData = [];
+
+        for (let i = 1; i < lines.length; i++) {
+            let line = lines[i];
+            let values = [];
+            let value = '';
+            let inQuotes = false;
+
+            for (let char of line) {
+                if (char === '"' && !inQuotes) {
+                    inQuotes = true; // Start of a quoted value
+                } else if (char === '"' && inQuotes) {
+                    inQuotes = false; // End of a quoted value
+                } else if (char === ',' && !inQuotes) {
+                    values.push(value.trim());
+                    value = ''; // Reset for the next value
+                } else {
+                    value += char; // Append the character to the current value
+                }
+            }
+            values.push(value.trim()); // Push the last value after the loop ends
+
+            // Create an object for the current line
+            const obj = headers.reduce((object, header, index) => {
+                object[header.trim()] = values[index] || ''; // Safely handle missing values
                 return object;
             }, {});
-        });
+
+            jsonData.push(obj);
+        }
+
         return jsonData;
     }
 
-    fetch('https://coastva.github.io/coast-va/data.csv')
+
+    fetch('assets/data/data.csv')
         .then(response => response.text())
         .then(csv => {
             const data = csvToJson(csv);
@@ -35,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="${person.imgSrc}" alt="${person.name}" class="img-fluid">
                     <div class="overlay">
                         <div class="team-details text-center">
-                            <p class="coach-bio">${person.bio}</p>
+                            <p class="coach-quote">${person.quote}</p>
                         </div>
                     </div>
                 </div>

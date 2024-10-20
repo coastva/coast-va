@@ -84,7 +84,7 @@ h2.coaches-title {
   font-size: 4.12rem;
   font-weight: 700;
 }
-
+/* 
 .overlay {
   background-color: rgba(1, 12, 24, 0.857);
   position: absolute;
@@ -96,7 +96,7 @@ h2.coaches-title {
   -moz-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-}
+} */
 
 .overlay p.coach-contact {
   color: #fff;
@@ -107,14 +107,13 @@ h2.coaches-title {
   display: none;
 }
 
-
 /* ----------------------- coaches grid */
 .team-member,
 .team-img {
   position: relative;
   overflow: hidden;
   max-width: 100%;
-  height: 195px;
+  height: 295px;
 }
 
 #coaches {
@@ -135,16 +134,14 @@ h2.coaches-title {
 }
 
 .team-img img {
-  -webkit-transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-  overflow: hidden;
   max-width: 100%;
-  background-position: center center;
   height: auto;
 }
 
+.team-member,
+.team-img {
+  height: 295px;
+}
 
 .team-img:hover .overlay {
   opacity: 1;
@@ -175,7 +172,6 @@ h2.coaches-title {
 .team-member {
   position: relative;
   max-width: 100%;
-  height: auto;
   background: rgba(255, 255, 255, 0.05);
   margin: 20px auto;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -184,12 +180,6 @@ h2.coaches-title {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(10px);
-}
-
-
-.contentBx {
-  max-width: 250px;
-  height: 150px;
 }
 
 #coaches .card.glassmorphism-card .content,
@@ -209,8 +199,8 @@ h2.coaches-title {
 .team-member,
 #coaches .card .content .imgBx {
   position: relative;
-  max-width: fit-content;
-  height: auto;
+  max-width: 250px;
+  height: 450px;
   overflow: hidden;
 }
 
@@ -267,34 +257,32 @@ h6.team-title {
   color: var(--teal);
   font-family: var(--scoreboard-font);
   font-size: 1.25rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 500;
 }
 
 .coach-role {
-  font-size: 1.475rem;
-  font-weight: 800;
+  font-size: 1.375rem;
+  font-weight: 700;
   font-family: var(--scoreboard-font);
   color: var(--teal);
   text-transform: uppercase;
   line-height: 1;
-  margin-bottom: 12px;
 }
 
 .coach-uni {
   font-family: var(--scoreboard-font);
-  font-weight: 600;
+  font-weight: 500;
   font-size: .85rem;
   color: var(--gray);
-  margin: 1.25px auto;
+  margin-top: 10px;
 }
 
 .coach-prev {
   font-family: var(--scoreboard-font);
   font-weight: 400;
-  font-size: .85rem;
+  font-size: .785rem;
   color: var(--dark-gray);
-  margin: 10px 20px;
 }
 
 .coach-quote {
@@ -311,22 +299,23 @@ a.coach-contact {
   font-size: .725rem;
   font-family: var(--scoreboard-font);
   margin: 0 auto;
+  padding-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
   h6.team-title {
     color: var(--teal);
     font-family: var(--scoreboard-font);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     letter-spacing: 2px;
   }
   
   .coach-role {
-    font-size: 1.75rem;
+    font-size: 1.35rem;
     font-family: var(--scoreboard-font);
     color: var(--teal);
     text-transform: uppercase;
     line-height: 1;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
   }
 }

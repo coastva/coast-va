@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return jsonData;
     }
 
-
     fetch('assets/data/data.csv')
         .then(response => response.text())
         .then(csv => {
@@ -46,10 +45,26 @@ document.addEventListener("DOMContentLoaded", function () {
             const directorRow = document.querySelector(".director-row");
             const teamRow = document.querySelector(".team-row");
 
+            // Array of default images to be used randomly
+            const defaultImages = [
+                'assets/images/default-coach1.png',
+                'assets/images/default-coach2.png',
+                'assets/images/default-coach3.png'
+            ];
+
+            // Function to pick a random default image
+            function getRandomDefaultImage() {
+                const randomIndex = Math.floor(Math.random() * defaultImages.length);
+                return defaultImages[randomIndex];
+            }
+
             data.forEach(person => {
                 console.log(`Email for ${person.name}: ${person.email}`);
 
                 const role = person.type === "director" ? "Program Director" : "Coach";
+
+                // Check if imgSrc is provided, else set to a random default image
+                const imgSrc = person.imgSrc && person.imgSrc.trim() !== '' ? person.imgSrc : getRandomDefaultImage();
 
                 const memberWrap = document.createElement("div");
                 memberWrap.className = "col-xs-8 col-sm-4 team-wrap";
@@ -57,15 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 memberWrap.innerHTML = `
             <div class="team-member text-center">
                 <div class="team-img">
-                    <img src="${person.imgSrc}" alt="${person.name}" class="img-fluid">
+                    <img src="${imgSrc}" alt="${person.name}" class="img-fluid">
                     <div class="overlay">
                         <div class="team-details text-center">
                             <p class="coach-quote">${person.quote}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 text-light text-coach-data my-3 pb-2">
-                    <h6 class="team-title">${person.name}, </h6>
+                <div class="col-12 text-light text-coach-data">
+                    <h6 class="team-title mx-1 mt-3">${person.name}, </h6>
                     <p class="coach-role">${role}</p>
                     <p class="coach-uni">${person.university} Alum</p>
                     <p class="coach-prev">${person.prev}</p>
@@ -76,16 +91,14 @@ document.addEventListener("DOMContentLoaded", function () {
                    <div class="text-center">
                  <i class="fas fa-phone"></i> 
                  </div>
-                    <p class="coach-contact"> 
-${person.number}</p></a>
+            </a>
                     </div>
                   <div class="col-12 col-sm-6 text-center">
                      <a class="coach-contact" href="mailto:${person.email}">
                                             <div class="text-center">
                        <i class="fas fa-envelope"></i>
                        </div>
-             <p class="coach-contact"> 
-${person.email} </p> </a>
+           </a>
                    </div>
                 </div>
             </div>
